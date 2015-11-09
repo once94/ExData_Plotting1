@@ -19,12 +19,12 @@ draw_plot4 <- function(data = NULL){
 
     # drawing 4 plots to one graphic device
     # topleft plot
-    plot(datetime, mydata$Global_active_power, type = 'l', ylab = 'Global Active Power', xlab = '')
+    plot(datetime, data$Global_active_power, type = 'l', ylab = 'Global Active Power', xlab = '')
     
     # bottomleft
-    plot(datetime, mydata$Sub_metering_1, type = 'l', xlab = '', ylab = 'Energy sub metering')
-    lines(datetime, mydata$Sub_metering_2, col = 'red')
-    lines(datetime, mydata$Sub_metering_3, col = 'blue')
+    plot(datetime, data$Sub_metering_1, type = 'l', xlab = '', ylab = 'Energy sub metering')
+    lines(datetime, data$Sub_metering_2, col = 'red')
+    lines(datetime, data$Sub_metering_3, col = 'blue')
     legend('topright', legend = c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3'), lty=c(1,1,1), col = c('black', 'red', 'blue'))
     
     # toprigth plot
