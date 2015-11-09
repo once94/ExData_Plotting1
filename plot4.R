@@ -8,10 +8,6 @@ draw_plot4 <- function(data = NULL){
         data <- load_data()
     }
     
-    # loading files for drawing other plots
-    source('plot2.R')
-    source('plot3.R')
-    
     # making datetime from separete date and time columns
     datetime <- as.POSIXct(paste(data$Date, data$Time))
     
@@ -21,10 +17,20 @@ draw_plot4 <- function(data = NULL){
     # setting parameters for multiple plots on graphic device
     par(mfcol = c(2,2))
 
-    # drawing plots
-    draw_plot2(data = data, draw_to_device = FALSE)
-    draw_plot3(data = data, draw_to_device = FALSE)
+    # drawing 4 plots to one graphic device
+    # topleft plot
+    plot(datetime, mydata$Global_active_power, type = 'l', ylab = 'Global Active Power', xlab = '')
+    
+    # bottomleft
+    plot(datetime, mydata$Sub_metering_1, type = 'l', xlab = '', ylab = 'Energy sub metering')
+    lines(datetime, mydata$Sub_metering_2, col = 'red')
+    lines(datetime, mydata$Sub_metering_3, col = 'blue')
+    legend('topright', legend = c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3'), lty=c(1,1,1), col = c('black', 'red', 'blue'))
+    
+    # toprigth plot
     with(data, plot(datetime, Voltage, type = 'l'))
+    
+    # bottomright plot
     with(data, plot(datetime, Global_reactive_power, type = 'l'))
     
     # closing graphic device
